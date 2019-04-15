@@ -1,12 +1,17 @@
+import Body from "./components/Body/Body";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Exemple } from "./components/Exemple/Exemple";
-
 const App = () => {
   return (
-    <Exemple title="Exemple" />
+    <React.Fragment>
+      <Header title="Exemple" />
+      <Body panels={["Panel", "Panel", "Panel", "Panel", "Panel"]} />
+      <Footer footers={["footer", "footer", "footer", "footer", "footer"]}/>
+    </React.Fragment>
   );
 };
 
