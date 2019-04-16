@@ -5,14 +5,34 @@ import Header from "./components/Header/Header";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-const App = () => {
-  return (
-    <React.Fragment>
-      <Header title="Exemple" />
-      <Body panels={["Panel", "Panel", "Panel", "Panel", "Panel"]} />
-      <Footer footers={["footer", "footer", "footer", "footer", "footer"]}/>
-    </React.Fragment>
-  );
+interface IState {
+  title: string,
+  panels: Array<string>,
+  footers: Array<string>
+}
+
+class App extends React.Component<object, IState> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      title: 'Exemple',
+      panels: [],
+      footers: []
+    };
+  }
+
+  render() {
+    const { title, panels, footers } = this.state;
+
+    return (
+      <React.Fragment>
+        <Header title={title} />
+        <Body panels={panels} />
+        <Footer footers={footers} />
+      </React.Fragment>
+    );
+  }
 };
 
 ReactDOM.render(
