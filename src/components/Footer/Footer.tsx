@@ -1,10 +1,12 @@
 import { Paper, Tab, Tabs } from "@material-ui/core";
 import * as React from "react";
 
-export interface IFooter { footers: string[]; }
+interface IFooter {
+  footers: string[];
+}
 
 export default class extends React.Component<IFooter, {}> {
-  render() {
+  public render() {
     const listTab = this.props.footers.map((value, index) => {
       return (
         <Tab label={value} key={index} />

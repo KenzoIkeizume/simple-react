@@ -1,19 +1,24 @@
 import { AppBar, Fab, Toolbar, Typography } from "@material-ui/core";
 import * as React from "react";
 
-export interface IHeader { title: string; }
+interface IHeader {
+  title: string;
+  onChangeStateModal: () => void;
+}
 
-const ADDICON = '+';
+const ADDICON = "+";
 
 export default class extends React.Component<IHeader, {}> {
-  render() {
+  public render() {
+    const { title, onChangeStateModal } = this.props;
+
     return (
       <AppBar position="static">
         <Toolbar>
           <Typography variant="headline" color="inherit" style={{ flex: 1 }}>
-            {this.props.title}
+            {title}
           </Typography>
-          <Fab aria-label="Add">
+          <Fab aria-label="Add" onClick={onChangeStateModal}>
             {ADDICON}
           </Fab>
         </Toolbar>

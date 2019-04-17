@@ -1,4 +1,5 @@
 import Body from "./components/Body/Body";
+import Create from "./components/Dialog/Create/Create";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 
@@ -6,9 +7,10 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 interface IState {
-  title: string,
-  panels: Array<string>,
-  footers: Array<string>
+  title: string;
+  panels: string[];
+  footers: string[];
+  open: boolean;
 }
 
 class App extends React.Component<object, IState> {
@@ -16,24 +18,53 @@ class App extends React.Component<object, IState> {
     super(props);
 
     this.state = {
-      title: 'Exemple',
+      footers: ["1", "2", "3"],
+      open: false,
       panels: [],
-      footers: []
+      title: "Exemple",
     };
+
+    this.onChangeStateModal = this.onChangeStateModal.bind(this);
+    this.onSubscribe = this.onSubscribe.bind(this);
   }
 
-  render() {
-    const { title, panels, footers } = this.state;
+  public render() {
+    const { title, panels, footers, open } = this.state;
 
     return (
       <React.Fragment>
-        <Header title={title} />
+        <Header
+          title={title}
+          onChangeStateModal={this.onChangeStateModal}
+        />
         <Body panels={panels} />
         <Footer footers={footers} />
+        <Create
+          open={open}
+          onChangeStateModal={this.onChangeStateModal}
+          onSubscribe={this.onSubscribe}
+        />
       </React.Fragment>
     );
   }
-};
+
+  public onChangeStateModal() {
+    const { open } = this.state;
+
+    this.setState({
+      open: !open,
+    });
+  }
+
+  public onSubscribe(email: string) {
+    const { panels } = this.state;
+
+    this.setState({
+      open: !open,
+      panels: [...panels, email],
+    });
+  }
+}
 
 ReactDOM.render(
   <App />, document.getElementById("app"),
