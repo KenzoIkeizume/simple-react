@@ -27,7 +27,7 @@ class App extends React.Component<object, IState> {
         1: [],
         2: [],
       },
-      title: "Exemple",
+      title: "Example",
     };
 
     this.onChangeStateModal = this.onChangeStateModal.bind(this);
