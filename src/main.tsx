@@ -8,9 +8,10 @@ import * as ReactDOM from "react-dom";
 
 interface IState {
   title: string;
-  panels: string[];
+  panels: any;
   footers: string[];
   open: boolean;
+  pageIndex: number;
 }
 
 class App extends React.Component<object, IState> {
@@ -18,18 +19,24 @@ class App extends React.Component<object, IState> {
     super(props);
 
     this.state = {
-      footers: ["1", "2", "3"],
+      footers: ["0", "1", "2"],
       open: false,
-      panels: [],
+      pageIndex: 0,
+      panels: {
+        0: [],
+        1: [],
+        2: [],
+      },
       title: "Exemple",
     };
 
     this.onChangeStateModal = this.onChangeStateModal.bind(this);
     this.onSubscribe = this.onSubscribe.bind(this);
+    this.onChangeTab = this.onChangeTab.bind(this);
   }
 
   public render() {
-    const { title, panels, footers, open } = this.state;
+    const { title, panels, footers, open, pageIndex } = this.state;
 
     return (
       <React.Fragment>
@@ -37,8 +44,8 @@ class App extends React.Component<object, IState> {
           title={title}
           onChangeStateModal={this.onChangeStateModal}
         />
-        <Body panels={panels} />
-        <Footer footers={footers} />
+        <Body panels={panels[pageIndex]} />
+        <Footer footers={footers} pageIndex={pageIndex} onChangeTab={this.onChangeTab}/>
         <Create
           open={open}
           onChangeStateModal={this.onChangeStateModal}
@@ -57,11 +64,20 @@ class App extends React.Component<object, IState> {
   }
 
   public onSubscribe(email: string) {
-    const { panels } = this.state;
+    const { panels, pageIndex } = this.state;
 
     this.setState({
       open: !open,
-      panels: [...panels, email],
+      panels: {
+        ...panels,
+        [pageIndex]: [...panels[pageIndex], email],
+      },
+    });
+  }
+
+  public onChangeTab(event: React.ChangeEvent<HTMLInputElement>, index: number) {
+    this.setState({
+      pageIndex: index,
     });
   }
 }
