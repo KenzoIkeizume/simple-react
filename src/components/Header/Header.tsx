@@ -18,7 +18,7 @@ export default class extends React.Component<IHeader, {}> {
           <Typography variant="headline" color="inherit" style={{ flex: 1 }}>
             {title}
           </Typography>
-          <Fab aria-label="Add" onClick={onChangeStateModal}>
+          <Fab aria-label="Add" color="primary" onClick={onChangeStateModal}>
             {ADDICON}
           </Fab>
         </Toolbar>

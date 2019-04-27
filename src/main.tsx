@@ -6,6 +6,8 @@ import Header from "./components/Header/Header";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+import "./favicon.ico";
+
 interface IState {
   title: string;
   panels: any;
@@ -19,7 +21,7 @@ class App extends React.Component<object, IState> {
     super(props);
 
     this.state = {
-      footers: ["0", "1", "2"],
+      footers: ["First", "Second", "Third"],
       open: false,
       pageIndex: 0,
       panels: {
